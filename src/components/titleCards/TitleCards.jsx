@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import './TitleCards.css'
 import cardsData from '../../assets/cards/Cards_data'
+import { Link } from 'react-router-dom';
 
 
 
@@ -33,7 +34,7 @@ const TitleCards = ({ title, category }) => {
       setApiData(data.results);
     } catch (error) {
       console.error('fetch failed', error);
-      setErrorMsg("⚠️ Unable to load movies. Please try again later.");
+      setErrorMsg(" Unable to load movies. Please try again later.");
     }
   }
 
@@ -52,10 +53,10 @@ const TitleCards = ({ title, category }) => {
           <div className="card-list" ref={cardsRef}>
             {
               apiData.map((card, index) => {
-                return <div className="card" key={index}>
+                return <Link to={`/player/${card.id}`} className="card" key={index}>
                   <img src={IMG_BASE_URL+card.backdrop_path} alt="" />
                   <p>{card.original_title}</p>
-                </div>
+                </Link>
               })
             }
           </div>
